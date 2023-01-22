@@ -3,13 +3,21 @@
     <head>
         
         <title>
-            {% block title %} Page Symfony : {% endblock%}
+            {% block title %} Arequipa : {% endblock %}
         </title>
         <meta charset="utf-8">
         
       
+        <link rel="stylesheet" href="{{ asset('css/calendar_font.css')}}">
+
+        <link rel="stylesheet" href="{{ asset('css/calendar/main.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/calendar/daygrid/main.css')}}">
         
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
+        
+        <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}">
+
+        <link rel="stylesheet" href="{{ asset('css/calendar_style.css')}}">
     </head>
     <body>
         
@@ -27,6 +35,16 @@
 
 
         <script src="{{ asset('js/jquery.min.js')}}"></script>
+        <script src="{{ asset('js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
+        <script src="{{ asset('js/popper.min.js')}}"></script>
+
+        <script src="{{ asset('js/calendar/core/main.js')}}"></script>
+        <script src="{{ asset('js/calendar/interaction/main.js')}}"></script>
+        <script src="{{ asset('js/calendar/daygrid/main.js')}}"></script>
+
+        {% block script %}{% endblock %}
+        
     </body>
 </html>

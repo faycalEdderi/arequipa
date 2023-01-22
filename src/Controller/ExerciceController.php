@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ExerciceController extends AbstractController
 {
+    #[Route('/exercice/create/{id}', name: 'exercice_edit')]
     #[Route('/exercice/create', name: 'exercice_create')]
     public function exercice_create(Request $request, EntityManagerInterface $entityManager, ExerciceRepository $exerciceRepository, int $id = null): Response
     {

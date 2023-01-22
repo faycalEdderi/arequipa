@@ -94,4 +94,9 @@ class ExerciceDone
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return  $this->weight . ' ' . $this->serie . ' ' . $this->repetitionNb;
+    }
 }

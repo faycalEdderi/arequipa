@@ -7,24 +7,61 @@
 {% block body %}
 {% block main %}
 
+{% for program in programInfos %}
+<div data-program-name="{{ program.exerciceName.name}}"  data-program-date="{{ program.date|date('Y-m-d')}}"></div>
+{% endfor %}
 
-<h2 class="text-center">Mes programmes</h2>
+<div class="content">
+    <div id='calendar'></div>
+</div>
+{% endblock %}
 
-<ul clas="">
-    {% for program in programInfos %}
-    <h3>{{program.date|date('d/m/Y')}}</h3>
-    <p class="lead">{{program.exerciceName.name| capitalize}}</p>
-    <ul class="mb-5">       
-        <li>{{program.repetitionNb}} répétitions</li>
-        <li>{{program.serie}} series </li>
-        {% if program.weight != null %}
-            <li>{{program.weight}} kg </li>
-        {% endif %}
-    </ul>
-    {% endfor %}
-  
-</ul>
+{% block script %}
+<script>
+    
+    // Array qui stockera toutes les info envoyer par twig
+    var programArray=[]
+    
+    document.addEventListener('DOMContentLoaded', function() {  
+    // recupération des attributs    
+    const entryInfoElements =
+        document.querySelectorAll('[data-program-date]', '[data-program-name]');
+   
+     for (let i = 0; i < entryInfoElements.length; i++) {
+        //console.log(entryInfoElements[i].getAttribute('data-program-name'))
+       //console.log(entryInfoElements[i].getAttribute('data-program-date'))
+
+        var date = entryInfoElements[i].getAttribute('data-program-date')
+        var name = entryInfoElements[i].getAttribute('data-program-name')
+
+        var programObj={
+            title: name,
+            start: date
+        }
+        programArray.push(programObj)  
+      }
 
 
-{% endblock%}
+    var calendarEl = document.getElementById('calendar');
+    
+
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: [ 'interaction', 'dayGrid' ],
+    defaultDate: '2023-01-01',
+    editable: true,
+    eventLimit: true, // allow "more" link when too many events
+    events: programArray
+        
+    
+  });
+
+  calendar.render();
+});
+
+  </script>
+
+  <script src="{{ asset('js/calendar.js')}}"></script>
+
+{% endblock %}
 {% endblock %}
