@@ -33,4 +33,14 @@ class ExerciceDoneController extends AbstractController
             'form' => $form
         ]);
     }
+
+    #[Route('/exercice/program/show', name: 'exercice_program_show')]
+    public function exercice_program_show(ExerciceDoneRepository $exerciceDoneRepository): Response
+    {
+        $programInfos = $exerciceDoneRepository->findAll();
+
+        return $this->render('exercice_done/show_program.html.twig', [
+            'programInfos' => $programInfos
+        ]);
+    }
 }

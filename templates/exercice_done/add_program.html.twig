@@ -15,6 +15,7 @@
 {{ form_label(form.exerciceName, "Nom de l'exercice : ") }}
 {{ form_widget(form.exerciceName, { attr : { placeholder: "Nom de l'exercice : ", autofocus : 'autofocus'}}) }}
 </p>
+
 <p>
 {{ form_label(form.date, 'Date : ') }}
 {{ form_widget(form.date, { attr : { placeholder: 'Date'}}) }}
@@ -27,6 +28,11 @@
 {{ form_label(form.serie, 'Nombre de serie : ') }}
 {{ form_widget(form.serie) }}
 </p>
+
+<p>
+    {{ form_label(form.weight, 'Poids : ') }}
+    {{ form_widget(form.weight) }}
+    </p>
 
 <p>
     <input type="submit" />

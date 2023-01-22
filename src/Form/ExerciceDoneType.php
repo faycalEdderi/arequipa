@@ -17,6 +17,7 @@ class ExerciceDoneType extends AbstractType
             ->add('date')
             ->add('repetitionNb')
             ->add('serie')
+            ->add('weight')
             ->add('exerciceName', EntityType::class, [
                 'class' => Exercice::class,
                 'choice_label' => 'name',

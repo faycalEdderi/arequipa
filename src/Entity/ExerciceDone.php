@@ -27,6 +27,9 @@ class ExerciceDone
     #[ORM\Column]
     private ?int $serie = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $weight = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class ExerciceDone
     public function setSerie(int $serie): self
     {
         $this->serie = $serie;
+
+        return $this;
+    }
+
+    public function getWeight(): ?float
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?float $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }

@@ -1,0 +1,6 @@
+{
+
+    "emmet.includeLanguages": {"twig": "html"},
+    "files.associations": {"*.twig": "html"},
+
+}

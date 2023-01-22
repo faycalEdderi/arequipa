@@ -1,0 +1,30 @@
+{% extends 'parent.html.twig' %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/style.css')}}">
+{% endblock %}
+{% block body %}
+{% block main %}
+
+
+<h2 class="text-center">Mes programmes</h2>
+
+<ul clas="">
+    {% for program in programInfos %}
+    <h3>{{program.date|date('d/m/Y')}}</h3>
+    <p class="lead">{{program.exerciceName.name| capitalize}}</p>
+    <ul class="mb-5">       
+        <li>{{program.repetitionNb}} répétitions</li>
+        <li>{{program.serie}} series </li>
+        {% if program.weight != null %}
+            <li>{{program.weight}} kg </li>
+        {% endif %}
+    </ul>
+    {% endfor %}
+  
+</ul>
+
+
+{% endblock%}
+{% endblock %}
