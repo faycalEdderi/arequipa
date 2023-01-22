@@ -1,0 +1,39 @@
+{% extends 'parent.html.twig' %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/style.css')}}">
+{% endblock %}
+{% block body %}
+{% block main %}
+
+
+<h2 class="text-center">Formulaire</h2>
+
+<form method="post">
+<p>
+{{ form_label(form.exerciceName, "Nom de l'exercice : ") }}
+{{ form_widget(form.exerciceName, { attr : { placeholder: "Nom de l'exercice : ", autofocus : 'autofocus'}}) }}
+</p>
+<p>
+{{ form_label(form.date, 'Date : ') }}
+{{ form_widget(form.date, { attr : { placeholder: 'Date'}}) }}
+</p>
+<p>
+{{ form_label(form.repetitionNb, 'Nombre de repetition : ') }}
+{{ form_widget(form.repetitionNb) }}
+</p>
+<p>
+{{ form_label(form.serie, 'Nombre de serie : ') }}
+{{ form_widget(form.serie) }}
+</p>
+
+<p>
+    <input type="submit" />
+</p>
+
+</form>
+
+
+{% endblock%}
+{% endblock %}
