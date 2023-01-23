@@ -8,7 +8,7 @@
 {% block main %}
 
 {% for program in programInfos %}
-<div data-program-name="{{ program.exerciceName.name}}"  data-program-date="{{ program.date|date('Y-m-d')}}"></div>
+<div data-program-id="{{ program.id}}" data-program-name="{{ program.exerciceName.name}}"  data-program-date="{{ program.date|date('Y-m-d')}}"></div>
 {% endfor %}
 
 <div class="content">
@@ -25,18 +25,23 @@
     document.addEventListener('DOMContentLoaded', function() {  
     // recupération des attributs    
     const entryInfoElements =
-        document.querySelectorAll('[data-program-date]', '[data-program-name]');
+        document.querySelectorAll('[data-program-date]', '[data-program-name]', '[data-program-id]');
    
      for (let i = 0; i < entryInfoElements.length; i++) {
         //console.log(entryInfoElements[i].getAttribute('data-program-name'))
        //console.log(entryInfoElements[i].getAttribute('data-program-date'))
 
+        var id = entryInfoElements[i].getAttribute('data-program-id')
         var date = entryInfoElements[i].getAttribute('data-program-date')
         var name = entryInfoElements[i].getAttribute('data-program-name')
 
+        var url = "/exercice/program/details/" + id
+
         var programObj={
             title: name,
-            start: date
+            start: date,
+            url: url
+          
         }
         programArray.push(programObj)  
       }
@@ -57,6 +62,7 @@
   });
 
   calendar.render();
+
 });
 
   </script>
