@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ExerciceDone;
 use App\Form\ExerciceDoneType;
 use App\Repository\ExerciceDoneRepository;
+use App\Repository\ExerciceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,6 +43,16 @@ class ExerciceDoneController extends AbstractController
 
         return $this->render('exercice_done/show_program.html.twig', [
             'programInfos' => $programInfos
+        ]);
+    }
+
+    #[Route('/exercice/program/details/{id}', name: 'exercice_show_details')]
+    public function exercice_program_details(int $id, ExerciceDoneRepository $exerciceDoneRepository): Response
+    {
+        $exerciceDetails = $exerciceDoneRepository->find($id);
+
+        return $this->render('exercice_done/show_program_details.html.twig', [
+            'exerciceDetails' => $exerciceDetails
         ]);
     }
 }

@@ -1,0 +1,31 @@
+{% extends 'parent.html.twig' %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/style.css')}}">
+{% endblock %}
+{% block body %}
+{% block main %}
+
+
+<h2 class="text-center display-1">{{exerciceDetails.exerciceName.name |capitalize }}</h2>
+
+<div class="d-flex justify-content-center mt-5">
+
+
+  
+    <ul class="mb-5 list-unstyled display-2">  
+        <li class="mb-3">Fait le {{exerciceDetails.date|date('d/m/Y')}}</li>     
+        <li class="mb-3">{{exerciceDetails.repetitionNb}} répétitions</li>
+        <li class="mb-3">{{exerciceDetails.serie}} series </li>
+        {% if exerciceDetails.weight != null %}
+            <li class="mb-3">{{exerciceDetails.weight}} kg </li>
+        {% endif %}
+    </ul>
+</div>
+  
+
+
+
+{% endblock%}
+{% endblock %}
