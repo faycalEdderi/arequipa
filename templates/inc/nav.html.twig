@@ -4,11 +4,15 @@
   <ul class="navbar-nav ">
       <li class="nav-item active">
         
-        
-        <a class="mr-3 text-white" href="{{ path('exercice_create') }}">Créer un exercice</a>
-        <a class="mr-3 text-white"href="{{ path('exercice_program_add') }}">Ajouter un programme</a>
-        <a class="mr-3 text-white"href="{{ path('exercice_program_show') }}">Mes programmes</a> 
-     
+        {% if app.user %}         
+          <a class="mr-3 text-white" href="{{ path('exercice_create') }}">Créer un exercice</a>
+          <a class="mr-3 text-white" href="{{ path('exercice_program_add') }}">Ajouter un programme</a>
+          <a class="mr-3 text-white" href="{{ path('exercice_program_show') }}">Mes programmes</a> 
+          <a class="mr-3 text-white" href="{{ path('app_logout') }}">Déconnexion</a> 
+          {% else %}
+          <a class="mr-3 text-white" href="{{ path('app_login') }}">Connexion</a> 
+          <a class="mr-3 text-white" href="{{ path('app_register') }}">Créer un compte</a> 
+        {% endif %}
       </li>
     </ul>
 </nav>

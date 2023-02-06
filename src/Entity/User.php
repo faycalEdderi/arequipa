@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,6 +30,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ExerciceDone::class, orphanRemoval: true)]
+    private Collection $user_program;
+
+    public function __construct()
+    {
+        $this->user_program = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,5 +107,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, ExerciceDone>
+     */
+    public function getUserProgram(): Collection
+    {
+        return $this->user_program;
+    }
+
+    public function addUserProgram(ExerciceDone $userProgram): self
+    {
+        if (!$this->user_program->contains($userProgram)) {
+            $this->user_program->add($userProgram);
+            $userProgram->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserProgram(ExerciceDone $userProgram): self
+    {
+        if ($this->user_program->removeElement($userProgram)) {
+            // set the owning side to null (unless already changed)
+            if ($userProgram->getUser() === $this) {
+                $userProgram->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return  $this->id;
     }
 }

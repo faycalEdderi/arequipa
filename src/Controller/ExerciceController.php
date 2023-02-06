@@ -19,6 +19,9 @@ class ExerciceController extends AbstractController
     #[Route('/exercice/create', name: 'exercice_create')]
     public function exercice_create(Request $request, EntityManagerInterface $entityManager, ExerciceRepository $exerciceRepository, int $id = null): Response
     {
+        // check if the user is connected
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $entity = $id ? $exerciceRepository->find($id) : new Exercice();
         $type = ExerciceType::class;
 
