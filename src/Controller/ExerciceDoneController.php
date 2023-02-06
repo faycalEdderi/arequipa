@@ -11,11 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ExerciceDoneController extends AbstractController
 {
-
 
 
     #[Route('/exercice/program/edit/{id}', name: 'exercice_program_edit')]
@@ -24,7 +23,7 @@ class ExerciceDoneController extends AbstractController
     {
         // check if the user is connected
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        // $user = $this->getUser();
+        $user = $this->getUser();
 
         // var_dump($user);
 
@@ -36,7 +35,8 @@ class ExerciceDoneController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($entity);
-            //echo "$entity";
+            $entity->setUser($user);
+
             $entityManager->flush();
 
 
@@ -53,11 +53,14 @@ class ExerciceDoneController extends AbstractController
     {
         // check if the user is connected
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $currentUser = $this->getUser();
 
-        $programInfos = $exerciceDoneRepository->findAll();
+        // retrieve program by logged user
+        $programInfos = $exerciceDoneRepository->findProgramByUser($currentUser);
 
         return $this->render('exercice_done/show_program.html.twig', [
-            'programInfos' => $programInfos
+            'programInfos' => $programInfos,
+
         ]);
     }
 

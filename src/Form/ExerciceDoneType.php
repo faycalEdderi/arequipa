@@ -29,10 +29,10 @@ class ExerciceDoneType extends AbstractType
 
         $builder
             ->add('date')
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'data' => $user,
-            ])
+            // ->add('user', EntityType::class, [
+            //     'class' => User::class,
+            //     'data' => $user,
+            // ])
             ->add('repetitionNb')
             ->add('serie')
             ->add('weight')
