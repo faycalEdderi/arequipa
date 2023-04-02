@@ -18,6 +18,9 @@
         <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}">
 
         <link rel="stylesheet" href="{{ asset('css/calendar_style.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     </head>
     <body>
         
@@ -28,11 +31,7 @@
            
                 {% block aside %}{% endblock%}
                 {% block main %}{% endblock%}
-            
-            
-            
         </div>
-
 
         <script src="{{ asset('js/jquery.min.js')}}"></script>
         <script src="{{ asset('js/bootstrap.min.js')}}"></script>
@@ -43,6 +42,7 @@
         <script src="{{ asset('js/calendar/core/main.js')}}"></script>
         <script src="{{ asset('js/calendar/interaction/main.js')}}"></script>
         <script src="{{ asset('js/calendar/daygrid/main.js')}}"></script>
+        
 
         {% block script %}{% endblock %}
         

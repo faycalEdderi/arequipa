@@ -5,12 +5,17 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\Exercice;
 use App\Entity\ExerciceDone;
+use App\Repository\ExerciceRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 
 class ExerciceDoneType extends AbstractType
@@ -29,16 +34,13 @@ class ExerciceDoneType extends AbstractType
 
         $builder
             ->add('date')
-            // ->add('user', EntityType::class, [
-            //     'class' => User::class,
-            //     'data' => $user,
-            // ])
             ->add('repetitionNb')
             ->add('serie')
             ->add('weight')
-            ->add('exerciceName', EntityType::class, [
-                'class' => Exercice::class,
-                'choice_label' => 'name',
+            ->add('exerciceName', null, [
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez sélectionner un exercice.']),
+                ],
             ]);
     }
 

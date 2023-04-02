@@ -8,7 +8,7 @@
 {% block main %}
 
 {% for program in programInfos %}
-<div data-program-id="{{ program.id}}" data-program-name="{{ program.exerciceName.name}}"  data-program-date="{{ program.date|date('Y-m-d')}}"></div>
+<div data-program-id="{{ program.id}}" data-program-name="{{ program.exerciceName}}"  data-program-date="{{ program.date|date('Y-m-d')}}"></div>
 {% endfor %}
 
 

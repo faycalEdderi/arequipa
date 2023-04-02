@@ -21,6 +21,7 @@ class ExerciceController extends AbstractController
     {
         // check if the user is connected
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
 
         $entity = $id ? $exerciceRepository->find($id) : new Exercice();
         $type = ExerciceType::class;
@@ -30,6 +31,7 @@ class ExerciceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($entity);
+            $entity->setUser($user);
             $entityManager->flush();
 
             return $this->redirectToRoute('exercice_create');

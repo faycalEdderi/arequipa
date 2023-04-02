@@ -14,9 +14,7 @@ class ExerciceDone
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Exercice $exerciceName = null;
+
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -34,22 +32,17 @@ class ExerciceDone
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $exerciceName = null;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getExerciceName(): ?Exercice
-    {
-        return $this->exerciceName;
-    }
 
-    public function setExerciceName(?Exercice $exerciceName): self
-    {
-        $this->exerciceName = $exerciceName;
-
-        return $this;
-    }
 
     public function getDate(): ?\DateTimeInterface
     {
@@ -112,6 +105,18 @@ class ExerciceDone
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getExerciceName(): ?string
+    {
+        return $this->exerciceName;
+    }
+
+    public function setExerciceName(string $exerciceName): self
+    {
+        $this->exerciceName = $exerciceName;
 
         return $this;
     }

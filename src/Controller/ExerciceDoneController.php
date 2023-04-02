@@ -13,24 +13,41 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
+
 class ExerciceDoneController extends AbstractController
 {
 
 
     #[Route('/exercice/program/edit/{id}', name: 'exercice_program_edit')]
     #[Route('/exercice/program/add', name: 'exercice_program_add')]
-    public function exercice_create(Request $request, EntityManagerInterface $entityManager, ExerciceDoneRepository $exerciceDoneRepository, int $id = null): Response
+    public function exercice_create(Request $request, EntityManagerInterface $entityManager, ExerciceDoneRepository $exerciceDoneRepository, ExerciceRepository $exerciceRepository, int $id = null): Response
     {
         // check if the user is connected
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
         // var_dump($user);
+        $exercices_list = $exerciceRepository->findExerciceByUser($user);
+        $entity = $id ? $exerciceRepository->findExerciceByUser($user) : new ExerciceDone();
 
-        $entity = $id ? $exerciceDoneRepository->find($id) : new ExerciceDone();
+
+
+        //$entity = $id ? $exerciceDoneRepository->find($id) : new ExerciceDone();
         $type = ExerciceDoneType::class;
 
+        foreach ($exercices_list as $exercice) {
+
+            //$entity->setExerciceName($exercice);
+            // var_dump($exercice);
+        }
+
+
+
+        //   die;
+        //var_dump($exercices_list);
+        //die;
         $form = $this->createForm($type, $entity);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,6 +62,7 @@ class ExerciceDoneController extends AbstractController
 
         return $this->render('exercice_done/add_program.html.twig', [
             'form' => $form,
+            'exercices_list' => $exercices_list
         ]);
     }
 
